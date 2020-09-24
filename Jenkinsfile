@@ -13,7 +13,7 @@ pipeline{
         stage('Image Build'){
             steps{
                 script{
-                    sh "docker build -t 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest rest-crud-using-aws-ecs/web-app/"
+                    sh "docker build -t 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest rest-crud/web-app/"
                 }
             }
         }       
