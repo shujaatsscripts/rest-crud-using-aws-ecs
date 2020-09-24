@@ -13,18 +13,19 @@ pipeline{
         stage('Image Build'){
             steps{
                 script{
-                    sh "docker build -t rest-crud-using-aws-ecs:latest ./web-app/"
+                    sh "docker build -t 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest ./web-app/"
                 }
             }
         }       
         stage('Image Push'){
             steps{
                 script{
-                    sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 935648617855.dkr.ecr.us-east-2.amazonaws.com"
-                    sh "docker tag rest-crud-using-aws-ecs:latest 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
-                    sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
+                    docker.withRegistry('935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs', jenkins-aws-secret-key-id){
+                       sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
+                    }
                 }
             }
         }
+        
     }           
 }
