@@ -13,20 +13,18 @@ pipeline{
         stage('Image Build'){
             steps{
                 script{
-                
-                    dockerimage = docker.build imagename
+                    sh "docker build -t 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest rest-crud-using-aws-ecs/web-app/"
                 }
             }
-        }
+        }       
         stage('Image Push'){
             steps{
                 script{
                     docker.withRegistry('935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs', credential('jenkins-aws-secret-key-id')) {
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push('latest')
+                       sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
                     }
                 }
             }
-        }           
-    }
+        }
+    }           
 }
