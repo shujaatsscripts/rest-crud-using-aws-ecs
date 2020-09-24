@@ -1,23 +1,28 @@
 pipeline{
+    environment {
+        imagename = "rest-crud-using-aws-ecs"
+        registryCredential = 'registryCredential'
+        dockerImage = ''
+    }
     agent any
     stages {
         stage('Cloning Repository'){
             steps{
-                checkout scm
+                git([url: 'https://github.com/usamashujaat1812/rest-crud-using-aws-ecs.git', branch: 'master'])
             }
         }
         stage('Image Build'){
             steps{
                 script{
                 
-                    dockerimage = docker.build "rest-crud-using-aws-ecs"
+                    dockerimage = docker.build imagename
                 }
             }
         }
         stage('Image Push'){
             steps{
                 script{
-                    docker.withRegistry('935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs', 'jenkins-aws-secret-key-id') {
+                    docker.withRegistry('935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs', registryCredential) {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
