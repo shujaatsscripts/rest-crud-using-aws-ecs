@@ -21,27 +21,13 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-2:935648617855:task-definition/rest-crud-task:3",
+
   "family": "rest-crud-task",
-  "requiresAttributes": [
-    {
 
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.task-iam-role"
-    },
-    {
-
-      "name": "ecs.capability.execution-role-ecr-pull"
-    }
-  ],
 
   "requiresCompatibilities": [
     "EC2"
   ],
   "networkMode": "bridge",
-  "cpu": "256",
-  "revision": 3,
-  "status": "ACTIVE"
+  "cpu": "256"
 }
