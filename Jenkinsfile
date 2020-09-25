@@ -20,7 +20,7 @@ pipeline{
         stage('Image Push'){
             steps{
                 script{
-                    docker.withRegistry('https://935648617855.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:jenkins-aws-secret-key-id'){
+                    docker.withRegistry('https://935648617855.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:usama'){
                        sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
                     }
                 }
