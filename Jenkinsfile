@@ -1,6 +1,6 @@
 pipeline{
     environment {
-        imagename = "rest-crud-using-aws-ecs"
+        GIT_COMMIT = ""
         dockerImage = ''
     }
     agent any
@@ -8,6 +8,7 @@ pipeline{
         stage('Cloning Repository'){
             steps{
                 git([url: 'https://github.com/usamashujaat1812/rest-crud-using-aws-ecs.git', branch: 'master'])
+                GIT_COMMIT = git log -1 --format=%h
             }
         }
         stage('Image Build'){
@@ -21,7 +22,7 @@ pipeline{
             steps{
                 script{
                     docker.withRegistry('https://935648617855.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:usama'){
-                       sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:latest"
+                       sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}"
                     }
                 }
             }
