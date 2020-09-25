@@ -8,6 +8,6 @@ sed -e "s;IMAGE_VARIABLE;${IMAGE};g" rest-crud-task.json > rest-crud-task_${GIT_
 aws ecs register-task-definition --family TASK_FAMILY --cli-input-json ./rest-crud-task_${GIT_COMMIT}.json
 
 TASK_REVISION=`aws ecs describe-task-definition --task-definition rest-crud-task | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
-DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
+#DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
 
-aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION} --desired-count ${DESIRED_COUNT}
+aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION} #--desired-count ${DESIRED_COUNT}
