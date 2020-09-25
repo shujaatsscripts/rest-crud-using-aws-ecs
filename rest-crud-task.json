@@ -43,5 +43,5 @@
   "networkMode": "bridge",
   "cpu": "256",
   "revision": 3,
-  "status": "ACTIVE",
+  "status": "ACTIVE"
 }
