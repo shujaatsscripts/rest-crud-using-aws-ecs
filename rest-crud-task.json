@@ -27,4 +27,5 @@
   ],
   "networkMode": "bridge",
   "cpu": "256"
+  
 }
