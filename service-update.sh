@@ -1,5 +1,5 @@
 #!/bin/bash
-CLUSTER_NAME="Usama-usecase-ALB"
+CLUSTER_NAME="arn:aws:ecs:us-east-2:935648617855:cluster/Usama-usecase-ALB"
 SERVICE_NAME="rest-crud-service"
 TASK_FAMILY="rest-crud-task"
 IMAGE=935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}
