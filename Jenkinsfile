@@ -1,6 +1,5 @@
 pipeline{
     environment {
-        GIT_COMMIT = ""
         dockerImage = ''
     }
     agent any
@@ -8,10 +7,6 @@ pipeline{
         stage('Cloning Repository'){
             steps{
                 git([url: 'https://github.com/usamashujaat1812/rest-crud-using-aws-ecs.git', branch: 'master'])
-                
-                script{
-                    sh "GIT_COMMIT = git log -1 --format=%h"
-                }
             }
         }
         stage('Image Build'){
