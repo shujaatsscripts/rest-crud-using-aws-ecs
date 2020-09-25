@@ -18,9 +18,6 @@
   "placementConstraints": [],
   "memory": "512",
   "taskRoleArn": "arn:aws:iam::935648617855:role/ecsTaskExecutionRole",
-  "compatibilities": [
-    "EC2"
-  ],
 
   "family": "rest-crud-task",
 
