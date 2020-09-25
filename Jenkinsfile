@@ -31,7 +31,7 @@ pipeline{
         stage('Service update'){
             steps{
                 script{
-                    ./service-update.sh
+                    sh "./service-update.sh"
                 }
             }
         }
