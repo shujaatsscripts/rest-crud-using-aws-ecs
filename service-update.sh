@@ -2,7 +2,7 @@
 CLUSTER_NAME=Usama-usecase-ALB
 SERVICE_NAME=rest-crud-service
 TASK_FAMILY=rest-crud-task
-IMAGE="935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}"
+IMAGE=935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}
 
 sed -i 's/IMAGE_VARIABLE/${IMAGE}/g' rest-crud-task.json > rest-crud-task_${GIT_COMMIT}.json
 aws ecs register-task-definition --family TASK_FAMILY --cli-input-json ./rest-crud-task_${GIT_COMMIT}.json

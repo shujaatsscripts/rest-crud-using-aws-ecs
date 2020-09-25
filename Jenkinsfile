@@ -31,6 +31,7 @@ pipeline{
         stage('Service update'){
             steps{
                 script{
+                    sh "chmod +x service-update.sh"
                     sh "./service-update.sh"
                 }
             }
