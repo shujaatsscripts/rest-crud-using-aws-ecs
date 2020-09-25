@@ -8,7 +8,10 @@ pipeline{
         stage('Cloning Repository'){
             steps{
                 git([url: 'https://github.com/usamashujaat1812/rest-crud-using-aws-ecs.git', branch: 'master'])
-                GIT_COMMIT = git log -1 --format=%h
+                
+                script{
+                    sh "GIT_COMMIT = git log -1 --format=%h"
+                }
             }
         }
         stage('Image Build'){
@@ -27,6 +30,5 @@ pipeline{
                 }
             }
         }
-
     }           
 }
