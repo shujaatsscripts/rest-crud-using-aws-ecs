@@ -1,6 +1,8 @@
 pipeline{
     environment {
-        dockerImage = ''
+        SERVICE_NAME="rest-crud-service"
+        TASK_FAMILY="rest-crud-task"
+        IMAGE=''
     }
     agent any
     stages {
@@ -13,6 +15,7 @@ pipeline{
             steps{
                 script{
                     sh "docker build -t 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT} ./web-app/"
+                    IMAGE="935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}"
                 }
             }
         }       
@@ -22,6 +25,17 @@ pipeline{
                     docker.withRegistry('https://935648617855.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:usama'){
                        sh "docker push 935648617855.dkr.ecr.us-east-2.amazonaws.com/rest-crud-using-aws-ecs:${GIT_COMMIT}"
                     }
+                }
+            }
+        }
+        stage('Service update'){
+            steps{
+                script{
+                    sh "sed -e "s;%IMAGE%;${IMAGE};g" rest-crud-task.json > rest-crud-task_${GIT_COMMIT}.json"
+                    sh "aws ecs register-task-definition --family TASK_FAMILY --cli-input-json ./rest-crud-task_${GIT_COMMIT}.json"
+                    TASK_REVISION=`aws ecs describe-task-definition --task-definition rest-crud-task | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+                    DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
+                    sh "aws ecs update-service --cluster default --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION} --desired-count ${DESIRED_COUNT}"
                 }
             }
         }
