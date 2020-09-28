@@ -39,7 +39,7 @@ pipeline{
         stage ('Cleaning Directories'){
             steps{
                 script{
-                    sh "docker rmi -f $(docker images -a -q)"
+                    sh "docker system prune --all -f"
                     sh "rm -rf ./*"
                 }
             }
