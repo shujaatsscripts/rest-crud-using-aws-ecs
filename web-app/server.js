@@ -31,7 +31,7 @@ app.use(
 );
 
 app.get('/',function(req,res){
-    res.send('Bijli bhari he mere ang ang me by Ahmad Alam khan');
+    res.send('Welcome');
 });
 
 
