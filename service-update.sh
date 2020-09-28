@@ -11,4 +11,4 @@ aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file:/
 TASK_REVISION=`aws ecs describe-task-definition --task-definition rest-crud-task | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
 #DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
 
-aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY} #--desired-count ${DESIRED_COUNT}
+aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY} --desired-count 1
