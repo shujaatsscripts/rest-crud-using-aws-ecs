@@ -1,31 +1,25 @@
 {
-  "executionRoleArn": "arn:aws:iam::935648617855:role/ecsTaskExecutionRole",
+
+  "family": "rest-crud-task",
   "containerDefinitions": [
     {
-
+      
+      "image": "IMAGE_VARIABLE",
+      "name": "rest-crud",
       "portMappings": [
         {
           "hostPort": 80,
           "protocol": "tcp",
           "containerPort": 3000
         }
-      ],
-      "cpu": 0,
-      "image": "IMAGE_VARIABLE",
-      "name": "rest-crud"
+      ]
+
     }
   ],
-  "placementConstraints": [],
-  "memory": "512",
-  "taskRoleArn": "arn:aws:iam::935648617855:role/ecsTaskExecutionRole",
-
-  "family": "rest-crud-task",
-
-
   "requiresCompatibilities": [
     "EC2"
   ],
   "networkMode": "bridge",
-  "cpu": "256"
-  
+  "cpu": "256",
+  "memory": "512"
 }
