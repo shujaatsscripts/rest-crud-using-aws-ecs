@@ -36,7 +36,7 @@ pipeline{
                 }
             }
         }
-        stage ('Cleaning Directories){
+        stage ('Cleaning Directories'){
             steps{
                 script{
                     sh "docker rmi -f $(docker images -a -q)"
